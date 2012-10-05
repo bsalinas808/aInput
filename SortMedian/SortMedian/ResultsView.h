@@ -1,6 +1,6 @@
 //
 //  ResultsView.h
-//  Input
+//  SortedMedian
 //
 //  Created by Brian Salinas on 10/4/12.
 //  Copyright (c) 2012 Bit Rhythmic Inc. All rights reserved.

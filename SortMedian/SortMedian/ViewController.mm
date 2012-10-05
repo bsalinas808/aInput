@@ -12,6 +12,7 @@
 
 static NSString *defaultText = @"Touch here";
 static NSString *placeHolderText = @"Enter list of numbers seperated by a space";
+static NSString *blank = @"";
 
 @interface ViewController () <UITextFieldDelegate>
 @property (readwrite, nonatomic)UITextField *tField;
@@ -23,21 +24,6 @@ static NSString *placeHolderText = @"Enter list of numbers seperated by a space"
 {
     Algorithms *algorithms;
     vector<int> sortArray;
-}
-
-- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
-{
-    return YES;
-}
-
-- (BOOL)textFieldShouldClear:(UITextField *)textField
-{
-    return YES;
-}
-
-- (void)textFieldDidBeginEditing:(UITextField *)textField
-{
-    NSLog(@"textFieldDidBeginEditing");
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
@@ -53,24 +39,12 @@ static NSString *placeHolderText = @"Enter list of numbers seperated by a space"
         if (number) sortArray.push_back([number intValue]);
     }
     
-    NSLog(@"textFieldShouldReturn items: %ld", sortArray.size());
-    
     [textField resignFirstResponder];
-    return YES;
-}
-
-- (BOOL)textFieldShouldEndEditing:(UITextField *)textField
-{
-    NSLog(@"textFieldShouldEndEditing: %@", textField.text);
-    
-    //    [textField resignFirstResponder];
-    //    return sortArray.size() == 0 ? NO : YES;
     return YES;
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField
 {
-    NSLog(@"textFieldDidEndEditing");
     if (sortArray.size()) {
         vector<int> sortedList = algorithms->iSort(&sortArray[0], sortArray.size());
         NSMutableString *sorted = [NSMutableString new];
@@ -86,11 +60,6 @@ static NSString *placeHolderText = @"Enter list of numbers seperated by a space"
     [textField setPlaceholder:@"start over"];
 }
 
-
-
-
-
-// Call this method somewhere in your view controller setup code.
 - (void)registerForKeyboardNotifications
 {
     [[NSNotificationCenter defaultCenter] addObserver:self
@@ -106,17 +75,15 @@ static NSString *placeHolderText = @"Enter list of numbers seperated by a space"
 // Called when the UIKeyboardDidShowNotification is sent.
 - (void)keyboardWasShown:(NSNotification*)aNotification
 {
-    //    NSDictionary* info = [aNotification userInfo];
-    //    NSLog(@"keyboardWasShown: %@", info);
-    NSLog(@"keyboardWasShown");
     [_tField setPlaceholder:placeHolderText];
+    self.results.median = blank;
+    self.results.sortedList = blank;
 }
 
 // Called when the UIKeyboardWillHideNotification is sent
 - (void)keyboardWillBeHidden:(NSNotification*)aNotification
 {
-    NSLog(@"keyboardWillBeHidden");
-    [_tField setText:@""];
+    [_tField setText:blank];
 }
 
 #pragma mark - Toolbar
@@ -170,8 +137,6 @@ static NSString *placeHolderText = @"Enter list of numbers seperated by a space"
     _tField.borderStyle = UITextBorderStyleBezel;
     _tField.backgroundColor = [UIColor whiteColor];
     
-    //    tView.background = [UIImage imageNamed:@"bg.png"];
-    
     [_tField setText:defaultText];
     [_tField setPlaceholder:placeHolderText];
     [_tField setFont:[UIFont fontWithName:@"Arial Rounded MT Bold" size:18]];
@@ -180,6 +145,9 @@ static NSString *placeHolderText = @"Enter list of numbers seperated by a space"
     [_tField setTextAlignment:UITextAlignmentCenter];
     [self.view addSubview:_tField];
 }
+
+#define RESULTS_HEIGHT 120.0
+#define RESULTS_LHS 60.0
 
 - (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
                                 duration:(NSTimeInterval)duration
@@ -190,27 +158,27 @@ static NSString *placeHolderText = @"Enter list of numbers seperated by a space"
     transitionFrame = ^{
         if ((toInterfaceOrientation == UIInterfaceOrientationLandscapeLeft) ||
             (toInterfaceOrientation == UIInterfaceOrientationLandscapeRight)) {
-            self.tField.frame = CGRectMake(60.0,
+            self.tField.frame = CGRectMake(RESULTS_LHS,
                                            Y_TOP_COMPONENT,
                                            LANDSCAPE_TEXT_WIDTH,
                                            TEXTFIELD_HEIGHT);
-            self.results.frame = CGRectMake(60.0,
+            self.results.frame = CGRectMake(RESULTS_LHS,
                                             Y_TOP_COMPONENT + TEXTFIELD_HEIGHT + 20.0,
                                             LANDSCAPE_TEXT_WIDTH,
-                                            120.0);
+                                            RESULTS_HEIGHT);
             
             CGRect rect = _toolbar.bounds;
             rect.size.width = [[UIScreen mainScreen] bounds].size.height;
             _toolbar.frame = rect;
         } else {
-            self.tField.frame = CGRectMake(60.0,
+            self.tField.frame = CGRectMake(RESULTS_LHS,
                                            Y_TOP_COMPONENT,
                                            PORTRAIT_TEXT_WIDTH,
                                            TEXTFIELD_HEIGHT);
-            self.results.frame = CGRectMake(60.0,
+            self.results.frame = CGRectMake(RESULTS_LHS,
                                             Y_TOP_COMPONENT + TEXTFIELD_HEIGHT + 20.0,
                                             PORTRAIT_TEXT_WIDTH,
-                                            120.0);
+                                            RESULTS_HEIGHT);
             CGRect rect = _toolbar.bounds;
             rect.size.width = [[UIScreen mainScreen] bounds].size.width;
             _toolbar.frame = rect;
@@ -233,10 +201,10 @@ static NSString *placeHolderText = @"Enter list of numbers seperated by a space"
     [self buildTextField];
     
     algorithms = new Algorithms();
-    _results = [[ResultsView alloc] initWithFrame:CGRectMake(60.0,
+    _results = [[ResultsView alloc] initWithFrame:CGRectMake(RESULTS_LHS,
                                                              Y_TOP_COMPONENT + TEXTFIELD_HEIGHT + 20.0,
                                                              PORTRAIT_TEXT_WIDTH,
-                                                             120.0)];
+                                                             RESULTS_HEIGHT)];
     _results.autoresizesSubviews = YES;
     [self.view addSubview:_results];
 }

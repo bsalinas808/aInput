@@ -1,6 +1,6 @@
 //
 //  InputAlgorithms.cpp
-//  Input
+//  SortedMedian
 //
 //  Created by Brian Salinas on 10/3/12.
 //  Copyright (c) 2012 Bit Rhythmic Inc. All rights reserved.
@@ -15,6 +15,7 @@ int Algorithms::findMedian(vector<int> A)
 
 int Algorithms::findOrderStat(vector<int> A, int order)
 {
+    // needs implementation
     return -1;
 }
 
