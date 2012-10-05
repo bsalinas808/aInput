@@ -9,7 +9,7 @@
 #ifndef __Input__Algorithms__
 #define __Input__Algorithms__
 
-#include <iostream>
+//#include <iostream>
 
 #include <vector>
 using namespace std;
@@ -18,7 +18,7 @@ class Algorithms
 {
 public:
     Algorithms(){}
-    Algorithms(const Algorithms & rhs){ *this = rhs; }
+//    Algorithms(const Algorithms & rhs){ *this = rhs; }
     ~Algorithms(){}
     
     int findMedian(vector<int> A);
