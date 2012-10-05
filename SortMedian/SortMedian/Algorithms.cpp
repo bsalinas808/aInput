@@ -8,15 +8,41 @@
 
 #include "Algorithms.h"
 
-int Algorithms::findMedian(vector<int> A)
+
+int partition(vector<int> A, int lo, int hi)
 {
-    return findOrderStat(A, (A.size() >> 1));
+    // implement
+    return 1;
 }
 
 int Algorithms::findOrderStat(vector<int> A, int order)
 {
-    // needs implementation
+    
+    if (A.size() == 1) return A[0];
+    
+    int lo = 0;
+    int hi = A.size();
+    int mid = order;
+    int pivot;
+    
+    while (lo < hi) {
+        pivot = partition(A, lo, hi);
+        if (pivot == mid)
+            break;
+        else if (pivot > mid)
+            hi = pivot;
+        else
+            lo = pivot + 1;
+        
+    }
+    
+//    return A[pivot];
     return -1;
+}
+
+int Algorithms::findMedian(vector<int> A)
+{
+    return findOrderStat(A, (A.size() >> 1));
 }
 
 // O(n) if sorted, O(n^2) if reverse sorted
