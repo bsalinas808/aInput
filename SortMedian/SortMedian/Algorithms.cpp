@@ -15,7 +15,7 @@ int Algorithms::findMedian(vector<int> A)
 
 int Algorithms::findOrderStat(vector<int> A, int order)
 {
-    
+    return -1;
 }
 
 // O(n) if sorted, O(n^2) if reverse sorted

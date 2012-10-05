@@ -127,8 +127,8 @@
 		0F33BBF5161F5F0400DD4E87 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				0F33BBFE161F60F900DD4E87 /* Algorithms.cpp */,
 				0F33BBFF161F60F900DD4E87 /* Algorithms.h */,
+				0F33BBFE161F60F900DD4E87 /* Algorithms.cpp */,
 			);
 			name = Models;
 			sourceTree = "<group>";

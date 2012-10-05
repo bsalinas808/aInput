@@ -10,8 +10,7 @@
 
 @interface ResultsView : UIView
 
-@property (readwrite, nonatomic)NSArray *sortedList;
-@property (readwrite, nonatomic)NSArray *minAndMax;
-@property (readwrite, nonatomic)int median;
+@property (readwrite, nonatomic)NSString *sortedList;
+@property (readwrite, nonatomic)NSString *median;
 
 @end
