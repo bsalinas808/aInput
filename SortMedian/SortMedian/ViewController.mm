@@ -57,7 +57,7 @@ static NSString *blank = @"";
         int median = algorithms->findMedian(sortArray);
         self.results.median = [NSString stringWithFormat:@"%d", median];
     }
-    [textField setPlaceholder:@"start over"];
+    [textField setPlaceholder:@"try again"];
 }
 
 - (void)registerForKeyboardNotifications
@@ -163,7 +163,7 @@ static NSString *blank = @"";
                                            LANDSCAPE_TEXT_WIDTH,
                                            TEXTFIELD_HEIGHT);
             self.results.frame = CGRectMake(RESULTS_LHS,
-                                            Y_TOP_COMPONENT + TEXTFIELD_HEIGHT + 20.0,
+                                            Y_TOP_COMPONENT + TEXTFIELD_HEIGHT + 8.0,
                                             LANDSCAPE_TEXT_WIDTH,
                                             RESULTS_HEIGHT);
             
@@ -176,7 +176,7 @@ static NSString *blank = @"";
                                            PORTRAIT_TEXT_WIDTH,
                                            TEXTFIELD_HEIGHT);
             self.results.frame = CGRectMake(RESULTS_LHS,
-                                            Y_TOP_COMPONENT + TEXTFIELD_HEIGHT + 20.0,
+                                            Y_TOP_COMPONENT + TEXTFIELD_HEIGHT + 8.0,
                                             PORTRAIT_TEXT_WIDTH,
                                             RESULTS_HEIGHT);
             CGRect rect = _toolbar.bounds;

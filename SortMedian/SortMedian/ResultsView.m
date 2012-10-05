@@ -20,7 +20,7 @@
     _sortedLabel = [UILabel new];
     _medianLabel = [UILabel new];
     NSMutableArray *labels = [@[_sortedLabel, _medianLabel] mutableCopy];
-#define LABEL_HEIGHT 40.0
+#define LABEL_HEIGHT 24.0
     CGRect rect = CGRectMake(0.0, 0.0, self.bounds.size.width, LABEL_HEIGHT);
     
     for (__strong UILabel *label in labels) {
@@ -28,6 +28,7 @@
         label.backgroundColor = [UIColor clearColor];
         label.textColor = [UIColor lightGrayColor];
         label.textAlignment = NSTextAlignmentCenter;
+        label.font = [UIFont fontWithName:@"ArialRoundedMTBold" size:18.0];
         label.autoresizingMask = UIViewAutoresizingFlexibleWidth;
         
         rect.origin.y += LABEL_HEIGHT;
