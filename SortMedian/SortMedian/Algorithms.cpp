@@ -8,16 +8,30 @@
 
 #include "Algorithms.h"
 
-
 int partition(vector<int> A, int lo, int hi)
 {
-    // implement
-    return 1;
+    // A more thourogh implementation would use a median of three or similar
+    // purpose algorithm before picking the pivot. The size of the array in
+    // this app is so small why bother.
+    int pivot = A[hi - 1];
+    int endOfLo = lo;
+    
+    for (int toPlace = lo; toPlace < hi - 1; ++toPlace) {
+        if (A[toPlace] < pivot) {
+            swap(A[toPlace], A[endOfLo]);
+            ++endOfLo;
+        }
+    }
+    
+    // move pivot to final destination
+    A[hi - 1] = A[endOfLo];
+    A[endOfLo] = pivot;
+    
+    return endOfLo;
 }
 
 int Algorithms::findOrderStat(vector<int> A, int order)
 {
-    
     if (A.size() == 1) return A[0];
     
     int lo = 0;
@@ -33,11 +47,9 @@ int Algorithms::findOrderStat(vector<int> A, int order)
             hi = pivot;
         else
             lo = pivot + 1;
-        
     }
     
-//    return A[pivot];
-    return -1;
+    return A[pivot];
 }
 
 int Algorithms::findMedian(vector<int> A)
